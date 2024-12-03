@@ -2,7 +2,7 @@ import axios from 'axios';
 import ServicoAutenticacao from './ServicoAutenticacao';
 
 const instanciaApi = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://easy-check-api.onrender.com',
 });
 
 instanciaApi.interceptors.request.use((config) => {

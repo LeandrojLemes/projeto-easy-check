@@ -28,7 +28,7 @@ const PaginaLogin = () => {
   };
 
   return (
-    <Principal titulo="Entrar">
+    <Principal titulo="Entre em sua conta!">
       <div className="campo">
         <label>Email</label>
         <input type="email" placeholder="Digite seu email" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -47,7 +47,7 @@ const PaginaLogin = () => {
       <BotaoCustomizado cor="secundaria" aoClicar={entrar}>
         Entrar
       </BotaoCustomizado>
-      <Link to="/novo-usuario">Ainda não tem conta?</Link>
+      <Link to="/novo-usuario">Não tem conta? Clique aqui!</Link>
     </Principal>
   );
 };
