@@ -1,0 +1,113 @@
+/* Botões */
+.botoes {
+  display: flex;
+  justify-content: space-between; 
+  gap: 1rem;
+  margin-bottom: 2rem;
+  width: 100%; 
+}
+
+
+.dashboards {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem; 
+  flex-wrap: wrap; 
+  margin-top: 1rem; 
+}
+
+
+.dashboard {
+  background-color: var(--cor-fundo-padrao, #f4f9f4);
+  border: 1px solid var(--cor-cinza, #cfd8dc);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 150px; 
+  height: 150px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  padding: 15px; 
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard:hover {
+  transform: scale(1.05); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+
+
+.dashboard h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: inherit;
+}
+
+
+.dashboard p {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0;
+  color: inherit;
+}
+
+
+.dashboard.aptos {
+  background-color: rgba(76, 175, 80, 0.2); 
+  border: 2px solid #4caf50; 
+  color: #388e3c; 
+}
+
+
+.dashboard.nao-aptos {
+  background-color: rgba(211, 47, 47, 0.2);
+  border: 2px solid #d32f2f; 
+  color: #b71c1c; 
+}
+
+
+.grafico {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.grafico h3 {
+  color: var(--cor-primaria, #388e3c);
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+
+@media (max-width: 768px) {
+  .dashboard {
+    width: 120px; 
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard {
+    width: 100px;
+    height: 100px;
+  }
+
+  .grafico h3 {
+    font-size: 1rem;
+  }
+
+  .dashboard h3 {
+    font-size: 0.8rem;
+  }
+
+  .dashboard p {
+    font-size: 1.6rem;
+  }
+}

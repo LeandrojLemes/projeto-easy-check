@@ -1,3 +1,5 @@
+
+
 * {
   margin: 0;
 }
@@ -6,7 +8,7 @@ html,
 body,
 #root {
   height: 100%;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 #root {
@@ -20,23 +22,29 @@ body,
 }
 
 :root {
-  --cor-primaria-clara: #7986cb;
-  --cor-primaria: #3f50b5;
-  --cor-primaria-escura: #303f9f;
+  /* Cores primárias e secundárias */
+  --cor-primaria-clara: #5ecb64; /* Verde mais suave, moderno e vibrante */
+  --cor-primaria: #3b9e3f; /* Verde médio, profundo e profissional */
+  --cor-primaria-escura: #2f7b33; /* Verde escuro, sofisticado e confiável */
 
-  --cor-secundaria-clara: #ffab40;
-  --cor-secundaria: #ff9100;
-  --cor-secundaria-escura: #ff6d00;
+  --cor-secundaria-clara: #91e7a3; /* Verde menta, moderno e relaxante */
+  --cor-secundaria: #4baf4f; /* Verde médio com um toque mais natural */
+  --cor-secundaria-escura: #3c8e3e; /* Verde escuro com leve profundidade */
 
-  --cor-fundo-padrao: #f7f7f7;
+  /* Fundo */
+  --cor-fundo-padrao: #f4f9f4; /* Branco-esverdeado suave, mais moderno e limpo */
 
-  --cor-texto-padrao: #1c2025;
-  --cor-texto-claro: #fff;
+  /* Texto */
+  --cor-texto-padrao: #245828; /* Verde muito escuro para maior sofisticação */
+  --cor-texto-claro: #ffffff; /* Branco para contraste em fundos escuros */
 
-  --cor-info: #0288d1;
-  --cor-sucesso: #1aa251;
-  --cor-aviso: #dea500;
-  --cor-erro: #eb0014;
+  /* Cores de status */
+  --cor-info: #66bb6a; /* Verde confiante e vivo */
+  --cor-sucesso: #2e7031; /* Verde muito estável para indicações de sucesso */
+  --cor-aviso: #8fd7a3; /* Verde pastel para avisos suaves */
+  --cor-erro: #e53935; /* Vermelho vibrante para erros */
 
-  --cor-cinza: #99a7bb;
+  /* Neutros */
+  --cor-cinza: #d6dadb; /* Cinza claro para suavizar áreas secundárias */
+  --cor-cinza-escuro: #607d8b; /* Cinza médio para contrastes elegantes */
 }
