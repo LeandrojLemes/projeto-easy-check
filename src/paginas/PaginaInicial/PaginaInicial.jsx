@@ -16,7 +16,7 @@ const PaginaInicial = () => {
   const funcionariosNaoAptos = 10;
 
   const data = {
-    labels: ['Aptos', 'Não Aptos'],
+    labels: ['Aptos', 'Pendentes'],
     datasets: [
       {
         label: 'Funcionários',
@@ -75,7 +75,7 @@ const PaginaInicial = () => {
           <p>{funcionariosAptos}</p>
         </div>
         <div className="dashboard nao-aptos">
-          <h3>Funcionários Não Aptos</h3>
+          <h3>Funcionários Pendentes</h3>
           <p>{funcionariosNaoAptos}</p>
         </div>
       </div>
