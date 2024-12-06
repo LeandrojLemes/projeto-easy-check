@@ -36,7 +36,7 @@ const PaginaNovoUsuario = () => {
   };
 
   return (
-    <Principal titulo="Novo Usuário" voltarPara="/login">
+    <Principal titulo="Crie sua conta!" voltarPara="/login">
       <div className="campo">
         <label>Nome</label>
         <input type="text" placeholder="Digite seu nome" value={nome} onChange={(e) => setNome(e.target.value)} />

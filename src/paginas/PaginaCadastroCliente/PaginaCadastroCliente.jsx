@@ -19,6 +19,9 @@ const PaginaCadastroCliente = () => {
   const [celular, setCelular] = useState('');
   const [dataNascimento, setDataNascimento] = useState('');
   const [cpf, setCpf] = useState('');
+  
+  const [cargo, setCargo] = useState(''); 
+  const [pis, setPis] = useState(''); 
 
   const [cep, setCep] = useState('');
   const [rua, setRua] = useState('');
@@ -26,68 +29,93 @@ const PaginaCadastroCliente = () => {
   const [bairro, setBairro] = useState('');
   const [cidade, setCidade] = useState('');
 
+  // Carregar dados do cliente ao editar
   useEffect(() => {
     if (params.id) {
-      const clienteEncontrado = instanciaServicoCliente.buscarPorId(params.id);
-      if (clienteEncontrado) {
-        setNome(clienteEncontrado.nome);
-        setEmail(clienteEncontrado.email);
-        setCelular(clienteEncontrado.celular);
-        setDataNascimento(clienteEncontrado.dataNascimento);
-        setCpf(clienteEncontrado.cpf);
-      }
+      const carregarCliente = async () => {
+        const cliente = await instanciaServicoCliente.buscarPorId(params.id);
+        if (cliente) {
+          setNome(cliente.nome);
+          setEmail(cliente.email);
+          setCelular(cliente.celular);
+          setDataNascimento(cliente.dataNascimento);
+          setCpf(cliente.cpf);
+          setCargo(cliente.cargo); 
+          setPis(cliente.pis); 
+          setCep(cliente.cep);
+          setRua(cliente.rua);
+          setNumero(cliente.numero);
+          setBairro(cliente.bairro);
+          setCidade(cliente.cidade);
+        }
+      };
+      carregarCliente();
     }
   }, [params.id]);
 
-  const salvar = () => {
+  // Salvar novo cliente ou editar cliente existente
+  const salvar = async () => {
     if (!nome || !email) {
       toast.error('Preencha todos os campos obrigatórios!');
       return;
     }
+
     const cliente = {
-      id: params.id ? +params.id : Date.now(),
+      id: params.id ? +params.id : Date.now(),  // Garante que o ID seja gerado corretamente
       nome,
       email,
       celular,
       dataNascimento,
       cpf,
+      cargo, 
+      pis, 
+      cep,
+      rua,
+      numero,
+      bairro,
+      cidade
     };
-    if (params.id) {
-      instanciaServicoCliente.editarCliente(cliente);
-    } else {
-      instanciaServicoCliente.cadastrarCliente(cliente);
+
+    try {
+      if (params.id) {
+        await instanciaServicoCliente.editarCliente(cliente); // Atualizar cliente existente
+      } else {
+        await instanciaServicoCliente.cadastrarCliente(cliente); // Criar novo cliente
+      }
+      navigate('/lista-clientes');
+    } catch (erro) {
+      toast.error('Erro ao salvar cliente!');
     }
-    navigate('/lista-clientes');
   };
 
   const buscarCEP = async (event) => {
     try {
       const resp = await axios.get(`https://brasilapi.com.br/api/cep/v2/${event.target.value}`);
-
       setRua(resp.data.street || '');
       setBairro(resp.data.neighborhood || '');
       setCidade(resp.data.city || '');
-
-      if (resp.data.street) {
-        document.getElementById('campoNumero').focus();
-      }
+      if (resp.data.street) document.getElementById('campoNumero').focus();
     } catch {
       toast.error('CEP não encontrado.');
     }
   };
 
   return (
-    <Principal titulo={params.id ? 'Editar Cliente' : 'Novo Cliente'} voltarPara="/lista-clientes">
+    <Principal titulo={params.id ? 'Editar Colaborador' : 'Novo Colaborador'} voltarPara="/lista-clientes">
       {params.id && (
         <div className="campo">
           <label>Id</label>
           <input type="text" value={params.id} disabled />
         </div>
       )}
-
       <div className="campo">
         <label>Nome</label>
-        <input type="text" placeholder="Digite seu nome" value={nome} onChange={(e) => setNome(e.target.value)} />
+        <input
+          type="text"
+          placeholder="Digite seu nome"
+          value={nome}
+          onChange={(e) => setNome(e.target.value)}
+        />
       </div>
 
       <div className="campo">
@@ -125,9 +153,25 @@ const PaginaCadastroCliente = () => {
         />
       </div>
 
-      <br />
-      <hr />
-      <br />
+      <div className="campo">
+        <label>Cargo</label>
+        <input
+          type="text"
+          placeholder="Digite seu cargo"
+          value={cargo}
+          onChange={(e) => setCargo(e.target.value)}
+        />
+      </div>
+
+      <div className="campo">
+        <label>PIS</label>
+        <input
+          type="text"
+          placeholder="Digite seu PIS"
+          value={pis}
+          onChange={(e) => setPis(e.target.value)}
+        />
+      </div>
 
       <div className="campo">
         <label>CEP</label>
@@ -139,6 +183,7 @@ const PaginaCadastroCliente = () => {
           onBlur={buscarCEP}
         />
       </div>
+
       <div className="campo">
         <label>Rua</label>
         <input
@@ -146,9 +191,9 @@ const PaginaCadastroCliente = () => {
           placeholder="Digite sua rua"
           value={rua}
           onChange={(e) => setRua(e.target.value)}
-          maxLength={100}
         />
       </div>
+
       <div className="campo">
         <label>Número</label>
         <input
@@ -157,9 +202,9 @@ const PaginaCadastroCliente = () => {
           placeholder="Digite o número"
           value={numero}
           onChange={(e) => setNumero(e.target.value)}
-          maxLength={100}
         />
       </div>
+
       <div className="campo">
         <label>Bairro</label>
         <input
@@ -167,9 +212,9 @@ const PaginaCadastroCliente = () => {
           placeholder="Digite seu Bairro"
           value={bairro}
           onChange={(e) => setBairro(e.target.value)}
-          maxLength={100}
         />
       </div>
+
       <div className="campo">
         <label>Cidade</label>
         <input
@@ -177,9 +222,9 @@ const PaginaCadastroCliente = () => {
           placeholder="Digite sua Cidade"
           value={cidade}
           onChange={(e) => setCidade(e.target.value)}
-          maxLength={100}
         />
       </div>
+
       <BotaoCustomizado cor="secundaria" aoClicar={salvar}>
         Salvar
       </BotaoCustomizado>

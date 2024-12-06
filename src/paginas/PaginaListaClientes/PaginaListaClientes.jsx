@@ -2,32 +2,43 @@ import { useEffect, useState } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import Principal from '../../comum/componentes/Principal/Principal';
-import ServicoCliente from '../../comum/servicos/ServicoCliente';
+import axios from 'axios';
 import './PaginaListaClientes.css';
 
-const instanciaServicoCliente = new ServicoCliente();
+const baseURL = 'https://easy-check-api.onrender.com/clientes';
 
 const PaginaListaClientes = () => {
   const navigate = useNavigate();
   const [listaClientes, setListaClientes] = useState([]);
 
+  // Buscar os clientes da API
   useEffect(() => {
     const buscarClientes = async () => {
-      const response = await instanciaServicoCliente.listar();
-      setListaClientes(response.data);
+      try {
+        const response = await axios.get(`${baseURL}/clientes`); // Utiliza a baseURL e a rota correta
+        setListaClientes(response.data);
+      } catch (error) {
+        console.error('Erro ao buscar clientes:', error);
+      }
     };
 
     buscarClientes();
   }, []);
 
+  // Navegar para a página de edição do cliente
   const navegarParaEdicao = (idCliente) => {
     navigate(`/cadastro-cliente/${idCliente}`);
   };
 
-  const excluir = (idCliente) => {
-    if (confirm('Tem certeza?')) {
-      const listaAtualizada = instanciaServicoCliente.excluirCliente(idCliente);
-      setListaClientes(listaAtualizada);
+  // Excluir o cliente pela API
+  const excluir = async (idCliente) => {
+    if (window.confirm('Tem certeza?')) {
+      try {
+        await axios.delete(`${baseURL}/clientes/${idCliente}`); // Utiliza a baseURL e a rota correta
+        setListaClientes((clientes) => clientes.filter(cliente => cliente.id !== idCliente)); // Atualiza a lista após a exclusão
+      } catch (error) {
+        console.error('Erro ao excluir cliente:', error);
+      }
     }
   };
 
@@ -35,8 +46,10 @@ const PaginaListaClientes = () => {
     <Principal titulo="Lista de Clientes" voltarPara="/">
       <Link to="/cadastro-cliente">Novo</Link>
 
-      {listaClientes.map((cliente) => {
-        return (
+      {listaClientes.length === 0 ? (
+        <p>Nenhum cliente cadastrado.</p>
+      ) : (
+        listaClientes.map((cliente) => (
           <div key={cliente.id} className="pagina-lista-clientes__item-cliente">
             {cliente.nome}
 
@@ -46,10 +59,11 @@ const PaginaListaClientes = () => {
               <FaTrash size={24} color="red" onClick={() => excluir(cliente.id)} />
             </div>
           </div>
-        );
-      })}
+        ))
+      )}
     </Principal>
   );
 };
 
 export default PaginaListaClientes;
+

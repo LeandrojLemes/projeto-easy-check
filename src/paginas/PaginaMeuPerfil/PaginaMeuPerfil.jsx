@@ -62,7 +62,7 @@ const PaginaMeuPerfil = () => {
         <input type="text" value={usuarioLogado.email} disabled />
       </div>
 
-      <BotaoCustomizado aoClicar={sair}>Sair</BotaoCustomizado>
+      <BotaoCustomizado aoClicar={sair} cor="primaria">Sair</BotaoCustomizado>
     </Principal>
   );
 };

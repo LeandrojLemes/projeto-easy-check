@@ -4,7 +4,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import BotaoCustomizado from '../../comum/componentes/BotaoCustomizado/BotaoCustomizado';
 import Principal from '../../comum/componentes/Principal/Principal';
-import { FaQrcode } from 'react-icons/fa'; 
+import { FaQrcode } from 'react-icons/fa';
 import './PaginaInicial.css';
 
 ChartJS.register(ArcElement, Tooltip, Legend, Title, ChartDataLabels);
@@ -52,35 +52,38 @@ const PaginaInicial = () => {
     <Principal>
       <div className="empresa-info">
         <h1 style={{ display: 'flex', alignItems: 'center' }}>
-          Nome da empresa
+          Escanear QrCode
           <FaQrcode
             size={24}
-            style={{ marginLeft: '10px', cursor: 'default' }} 
+            style={{ marginLeft: '10px', cursor: 'default' }}
           />
         </h1>
       </div>
-
       <div className="botoes">
-        <BotaoCustomizado cor="secundaria" aoClicar={() => navigate('/lista-tarefas')}>
-          Lista de Tarefas
-        </BotaoCustomizado>
-        <BotaoCustomizado cor="primaria" aoClicar={() => navigate('/lista-clientes')}>
-          Meus Colaboradores
-        </BotaoCustomizado>
+        <div className="botao-colaborador">
+          <BotaoCustomizado cor="primaria" aoClicar={() => navigate('/lista-clientes')}>
+            Meus Colaboradores
+          </BotaoCustomizado>
+        </div>
+        <div className="botao-novo">  
+          <BotaoCustomizado cor="secundaria" aoClicar={() => navigate('/cadastro-cliente')}>
+            Novo
+          </BotaoCustomizado>
+        </div>
       </div>
 
-      <div className="dashboards">
-        <div className="dashboard aptos">
+      <div className="dashboards" >
+        <div className="dashboard aptos" onClick={() => navigate('/lista-clientes')}>
           <h3>Funcionários Aptos</h3>
           <p>{funcionariosAptos}</p>
         </div>
-        <div className="dashboard nao-aptos">
+        <div className="dashboard nao-aptos" onClick={() => navigate('/lista-clientes')}>
           <h3>Funcionários Pendentes</h3>
           <p>{funcionariosNaoAptos}</p>
         </div>
       </div>
 
-     
+
       <div className="grafico">
         <h3>Proporção de Funcionários</h3>
         <Pie data={data} options={options} />
