@@ -4,8 +4,7 @@ import { toast } from 'react-toastify';
 import BotaoCustomizado from '../../comum/componentes/BotaoCustomizado/BotaoCustomizado';
 import Principal from '../../comum/componentes/Principal/Principal';
 import ServicoAutenticacao from '../../comum/servicos/ServicoAutenticacao';
-import './PaginaLogin.css'
-
+import './PaginaLogin.css';
 
 const instanciaServicoAutenticacao = new ServicoAutenticacao();
 
@@ -14,7 +13,6 @@ const PaginaLogin = () => {
 
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  
 
   const entrar = async () => {
     try {
@@ -23,18 +21,28 @@ const PaginaLogin = () => {
         return;
       }
 
-      await instanciaServicoAutenticacao.login(email, senha);
-      navigate('/');
+      const usuario = await instanciaServicoAutenticacao.login(email, senha);
+
+      // Salvar o ID do usuário no localStorage
+      localStorage.setItem('usuarioId', usuario.id);
+
+      navigate('/'); // Navegar para a página inicial
     } catch (error) {
-      toast.error(error.response.data);
+      const mensagemErro = error.response?.data || 'Erro ao fazer login. Verifique suas credenciais.';
+      toast.error(mensagemErro);
     }
   };
 
   return (
-    <Principal titulo="Faça seu Login!"  >
+    <Principal titulo="Faça seu Login!">
       <div className="campo">
         <label>Email</label>
-        <input type="email" placeholder="Digite seu email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input
+          type="email"
+          placeholder="Digite seu email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </div>
 
       <div className="campo">

@@ -11,3 +11,20 @@
   padding-bottom: 0;
   padding-left: 16px; */
 }
+.cabecalho_usuario {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cabecalho_sair {
+  background: none;
+  border: none;
+  color: #f00;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cabecalho_sair:hover {
+  text-decoration: underline;
+}

@@ -10,10 +10,12 @@ instanciaApi.interceptors.request.use((config) => {
 
   const usuarioLogado = _servicoAutenticacao.buscarUsuarioLogado();
   if (usuarioLogado) {
-    config.headers['x-usuario'] = usuarioLogado.id;
+    config.headers['x-usuario-id'] = usuarioLogado.id; // Atualizado para 'x-usuario-id'
   }
 
   return config;
+}, (error) => {
+  return Promise.reject(error);
 });
 
 export default instanciaApi;
