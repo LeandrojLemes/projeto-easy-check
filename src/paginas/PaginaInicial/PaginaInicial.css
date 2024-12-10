@@ -1,12 +1,44 @@
+/* Estrutura e Estilo Geral */
+body {
+  font-family: 'Roboto', sans-serif; /* Use a fonte Roboto */
+  line-height: 1.5;
+  color: #333;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
 /* Botões */
 .botoes {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* Centraliza os botões */
   gap: 1rem;
   margin-bottom: 2rem;
-  width: 100%;
 }
 
+.botao-colaborador, .botao-novo {
+  background-color: #4CAF50; /* Verde padrão */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 20px; /* Aumenta o espaçamento interno */
+  font-size: 1rem; /* Tamanho da fonte uniforme */
+  font-weight: bold; /* Texto mais forte */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center; /* Centraliza o texto */
+}
+
+.botao-colaborador:hover, .botao-novo:hover {
+  background-color: #388E3C; /* Verde mais escuro no hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra ao passar o mouse */
+}
+
+.botao-colaborador, .botao-novo {
+  flex-grow: 1; /* Os botões ocupam a mesma largura */
+}
+
+/* Dashboards */
 .dashboards {
   display: flex;
   justify-content: center;
@@ -29,30 +61,37 @@
   text-align: center;
   font-weight: bold;
   padding: 15px;
+  cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-  cursor: pointer; 
+  animation: fadeIn 0.5s ease-out;
 }
 
+.dashboard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Dashboards Específicos */
 .dashboard.aptos {
   background-color: rgba(76, 175, 80, 0.2);
-  border: 2px solid #4caf50;
-  color: #388e3c;
+  border: 2px solid #4CAF50;
+  color: #388E3C;
 }
 
 .dashboard.aptos:hover {
-  background-color: rgba(76, 175, 80, 0.4); /* Destaca mais ao passar o cursor */
-  color: #ffffff; /* Muda o texto para branco */
+  background-color: rgba(76, 175, 80, 0.4);
+  color: #ffffff;
 }
 
 .dashboard.nao-aptos {
   background-color: rgba(211, 47, 47, 0.2);
-  border: 2px solid #d32f2f;
-  color: #b71c1c;
+  border: 2px solid #D32F2F;
+  color: #B71C1C;
 }
 
 .dashboard.nao-aptos:hover {
-  background-color: rgba(211, 47, 47, 0.4); /* Destaca mais ao passar o cursor */
-  color: #ffffff; /* Muda o texto para branco */
+  background-color: rgba(211, 47, 47, 0.4);
+  color: #ffffff;
 }
 
 .dashboard h3 {
@@ -69,6 +108,7 @@
   color: inherit;
 }
 
+/* Gráfico */
 .grafico {
   margin-top: 2rem;
   display: flex;
@@ -78,12 +118,25 @@
 }
 
 .grafico h3 {
-  color: var(--cor-primaria, #388e3c);
+  color: var(--cor-primaria, #388E3C);
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 1rem;
 }
 
+/* Animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade */
 @media (max-width: 768px) {
   .dashboard {
     width: 120px;
@@ -109,17 +162,18 @@
     font-size: 1.6rem;
   }
 }
-.botoes {
-  display: flex;
-  gap: 10px; /* Adiciona espaçamento entre os botões */
-}
 
-.botao-colaborador {
-  flex-shrink: 0; /* Impede que o botão "Meus Colaboradores" encolha */
-  width: 200px; /* Define uma largura maior para o botão "Meus Colaboradores" */
-}
+@media (max-width: 360px) {
+  .dashboard {
+    width: 80px;
+    height: 80px;
+  }
 
-.botao-novo {
-  flex-shrink: 0; /* Impede que o botão "Novo" encolha */
-  width: 120px; /* Define uma largura menor para o botão "Novo" */
+  .dashboard h3 {
+    font-size: 0.7rem;
+  }
+
+  .dashboard p {
+    font-size: 1.4rem;
+  }
 }

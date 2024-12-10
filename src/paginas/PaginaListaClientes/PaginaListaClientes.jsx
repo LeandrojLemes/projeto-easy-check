@@ -24,8 +24,8 @@ const PaginaListaClientes = () => {
         });
         setListaClientes(response.data);
       } catch (error) {
-        toast.error('Erro ao buscar clientes.');
-        console.error('Erro ao buscar clientes:', error.response?.data || error.message);
+        toast.error('Erro ao buscar colaborador.');
+        console.error('Erro ao buscar colaborador :', error.response?.data || error.message);
       } finally {
         setCarregando(false);
       }
@@ -39,20 +39,20 @@ const PaginaListaClientes = () => {
     if (idCliente) {
       navigate(`/cadastro-cliente/${idCliente}`);
     } else {
-      toast.error('ID do cliente não encontrado.');
+      toast.error('ID do colaborador não encontrado.');
     }
   };
 
   // Excluir cliente da API
   const excluir = async (idCliente) => {
     if (!idCliente) {
-      toast.error('ID do cliente não fornecido para exclusão.');
+      toast.error('ID do colaborador não fornecido para exclusão.');
       return;
     }
 
-    if (window.confirm('Tem certeza que deseja excluir este cliente?')) {
+    if (window.confirm('DEseja excluir esse Colaborador?')) {
       try {
-        console.log('Tentando excluir cliente com ID:', idCliente);
+        console.log('Tentando excluir colaborador com ID:', idCliente);
 
         await instanciaApi.delete(`/clientes/${idCliente}`, {
           headers: {
@@ -61,28 +61,28 @@ const PaginaListaClientes = () => {
           },
         });
 
-        console.log('Cliente excluído com sucesso.');
+        console.log('Colaborador excluído com sucesso.');
         setListaClientes((clientes) =>
           clientes.filter((cliente) => cliente.id !== idCliente && cliente.id_cliente !== idCliente)
         );
-        toast.success('Cliente excluído com sucesso!');
+        toast.success('Colaborador excluído com sucesso!');
       } catch (error) {
-        console.error('Erro ao excluir cliente:', error.response?.data || error.message);
-        toast.error('Erro ao excluir cliente.');
+        console.error('Erro ao excluir Colaborador:', error.response?.data || error.message);
+        toast.error('Erro ao excluir Colaborador.');
       }
     }
   };
 
   return (
-    <Principal titulo="Lista de Clientes" voltarPara="/">
+    <Principal titulo="Meus Colaboradores" voltarPara="/">
       <Link to="/cadastro-cliente" className="pagina-lista-clientes__novo">
-        Novo Cliente
+        + Novo Colaborador 
       </Link>
 
       {carregando ? (
         <p>Carregando...</p>
       ) : listaClientes.length === 0 ? (
-        <p>Nenhum cliente cadastrado.</p>
+        <p>Nenhum Colaborador cadastrado.</p>
       ) : (
         listaClientes.map((cliente) => (
           <div
