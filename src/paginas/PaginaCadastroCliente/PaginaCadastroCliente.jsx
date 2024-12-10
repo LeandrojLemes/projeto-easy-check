@@ -70,7 +70,7 @@ const PaginaCadastroCliente = () => {
       cargo,
       pis,
       rua,
-      numero: parseInt(numero, 10) || null, // Garantir que número seja inteiro ou nulo
+      numero: parseInt(numero, 10) || null, 
       bairro,
       cidade,
     };
@@ -79,21 +79,21 @@ const PaginaCadastroCliente = () => {
       setCarregando(true);
       if (params?.id) {
         await instanciaServicoCliente.editarCliente({ ...cliente, id: params.id });
-        toast.success('Cliente atualizado com sucesso!');
+        toast.success('Colaborador atualizado!');
       } else {
         await instanciaServicoCliente.cadastrarCliente(cliente);
-        toast.success('Cliente cadastrado com sucesso!');
+        toast.success('Colaborador cadastrado !');
       }
       navigate('/lista-clientes');
     } catch (erro) {
-      toast.error(erro.response?.data?.mensagem || 'Erro ao salvar cliente!');
+      toast.error(erro.response?.data?.mensagem || 'Erro ao salvar Colaborador !');
     } finally {
       setCarregando(false);
     }
   };
 
   return (
-    <Principal titulo={params?.id ? 'Editar Cliente' : 'Novo Cliente'} voltarPara="/lista-clientes">
+    <Principal titulo={params?.id ? 'Editar Cliente' : 'Novo Colaborador '} voltarPara="/lista-clientes">
       {carregando ? (
         <p>Carregando...</p>
       ) : (
@@ -207,3 +207,4 @@ const PaginaCadastroCliente = () => {
 };
 
 export default PaginaCadastroCliente;
+

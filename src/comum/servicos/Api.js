@@ -10,7 +10,7 @@ instanciaApi.interceptors.request.use((config) => {
 
   const usuarioLogado = _servicoAutenticacao.buscarUsuarioLogado();
   if (usuarioLogado) {
-    config.headers['x-usuario-id'] = usuarioLogado.id; // Atualizado para 'x-usuario-id'
+    config.headers['x-usuario-id'] = usuarioLogado.id; 
   }
 
   return config;

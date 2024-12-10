@@ -23,10 +23,10 @@ const PaginaLogin = () => {
 
       const usuario = await instanciaServicoAutenticacao.login(email, senha);
 
-      // Salvar o ID do usuário no localStorage
+     
       localStorage.setItem('usuarioId', usuario.id);
 
-      navigate('/'); // Navegar para a página inicial
+      navigate('/'); 
     } catch (error) {
       const mensagemErro = error.response?.data || 'Erro ao fazer login. Verifique suas credenciais.';
       toast.error(mensagemErro);

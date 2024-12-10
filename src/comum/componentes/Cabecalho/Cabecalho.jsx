@@ -12,13 +12,13 @@ function Cabecalho() {
   const sair = () => {
     instanciaServicoAutenticacao.sair();
     toast.success('Você saiu com sucesso!');
-    window.location.href = '/login'; // Redireciona para a página de login
+    window.location.href = '/login'; 
   };
 
   return (
     <header className="cabecalho_root">
       <Link to="/">
-        <img src="/assets/logo.jpeg" alt="Logo" height={40} />
+        <img src="/src/assets/vite.svg.svg" alt="Logo" height={48} />
       </Link>
 
       {usuarioLogado && (

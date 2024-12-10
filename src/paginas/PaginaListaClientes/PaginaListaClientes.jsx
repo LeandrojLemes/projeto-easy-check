@@ -11,7 +11,7 @@ const PaginaListaClientes = () => {
   const [listaClientes, setListaClientes] = useState([]);
   const [carregando, setCarregando] = useState(false);
 
-  // Buscar os clientes da API
+  
   useEffect(() => {
     const buscarClientes = async () => {
       setCarregando(true);
@@ -34,7 +34,41 @@ const PaginaListaClientes = () => {
     buscarClientes();
   }, []);
 
-  // Navegar para a página de edição do cliente
+  const verificarAptidao = (cliente) => {
+    const {
+      nome,
+      email,
+      celular,
+      cpf,
+      cargo,
+      pis,
+      cep,
+      rua,
+      numero,
+      bairro,
+      cidade,
+    } = cliente;
+
+    const camposObrigatorios = [
+      nome,
+      email,
+      celular,
+      cpf,
+      cargo,
+      pis,
+      cep,
+      rua,
+      numero,
+      bairro,
+      cidade,
+    ];
+
+    return camposObrigatorios.every(
+      (campo) => campo !== null && campo !== undefined && campo.toString().trim() !== ''
+    );
+  };
+
+  
   const navegarParaEdicao = (idCliente) => {
     if (idCliente) {
       navigate(`/cadastro-cliente/${idCliente}`);
@@ -43,17 +77,15 @@ const PaginaListaClientes = () => {
     }
   };
 
-  // Excluir cliente da API
+  
   const excluir = async (idCliente) => {
     if (!idCliente) {
       toast.error('ID do colaborador não fornecido para exclusão.');
       return;
     }
 
-    if (window.confirm('DEseja excluir esse Colaborador?')) {
+    if (window.confirm('Deseja excluir esse Colaborador?')) {
       try {
-        console.log('Tentando excluir colaborador com ID:', idCliente);
-
         await instanciaApi.delete(`/clientes/${idCliente}`, {
           headers: {
             'x-usuario-id': localStorage.getItem('usuarioId'),
@@ -61,13 +93,11 @@ const PaginaListaClientes = () => {
           },
         });
 
-        console.log('Colaborador excluído com sucesso.');
         setListaClientes((clientes) =>
           clientes.filter((cliente) => cliente.id !== idCliente && cliente.id_cliente !== idCliente)
         );
         toast.success('Colaborador excluído com sucesso!');
       } catch (error) {
-        console.error('Erro ao excluir Colaborador:', error.response?.data || error.message);
         toast.error('Erro ao excluir Colaborador.');
       }
     }
@@ -76,7 +106,7 @@ const PaginaListaClientes = () => {
   return (
     <Principal titulo="Meus Colaboradores" voltarPara="/">
       <Link to="/cadastro-cliente" className="pagina-lista-clientes__novo">
-        + Novo Colaborador 
+        + Novo Colaborador
       </Link>
 
       {carregando ? (
@@ -84,25 +114,30 @@ const PaginaListaClientes = () => {
       ) : listaClientes.length === 0 ? (
         <p>Nenhum Colaborador cadastrado.</p>
       ) : (
-        listaClientes.map((cliente) => (
-          <div
-            key={cliente.id || cliente.id_cliente}
-            className="pagina-lista-clientes__item-cliente"
-          >
-            <span>{cliente.nome}</span>
-            <div className="pagina-lista-clientes__item-cliente-acoes">
-              <FaEdit
-                size={24}
-                onClick={() => navegarParaEdicao(cliente.id || cliente.id_cliente)}
-              />
-              <FaTrash
-                size={24}
-                color="red"
-                onClick={() => excluir(cliente.id || cliente.id_cliente)}
-              />
+        listaClientes.map((cliente) => {
+          const apto = verificarAptidao(cliente);
+          return (
+            <div
+              key={cliente.id || cliente.id_cliente}
+              className={`pagina-lista-clientes__item-cliente ${
+                apto ? 'apto' : 'nao-apto'
+              }`}
+            >
+              <span>{cliente.nome}</span>
+              <div className="pagina-lista-clientes__item-cliente-acoes">
+                <FaEdit
+                  size={24}
+                  onClick={() => navegarParaEdicao(cliente.id || cliente.id_cliente)}
+                />
+                <FaTrash
+                  size={24}
+                  color="red"
+                  onClick={() => excluir(cliente.id || cliente.id_cliente)}
+                />
+              </div>
             </div>
-          </div>
-        ))
+          );
+        })
       )}
     </Principal>
   );
