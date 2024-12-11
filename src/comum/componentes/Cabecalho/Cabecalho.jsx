@@ -90,6 +90,7 @@ import './Cabecalho.css';
 import ServicoAutenticacao from '../../servicos/ServicoAutenticacao';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
+import { color } from 'chart.js/helpers';
 
 const instanciaServicoAutenticacao = new ServicoAutenticacao();
 
@@ -109,7 +110,7 @@ function Cabecalho() {
 
   return (
     <header className="cabecalho_root">
-      <Link to="/">Início</Link>
+      <Link to="/"><img height={48} width={48} src="/logoEasyCheck.svg" alt="" /></Link>
 
       {usuarioLogado && (
         <div className="cabecalho_usuario">
