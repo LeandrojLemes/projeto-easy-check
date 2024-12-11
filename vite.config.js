@@ -23,15 +23,15 @@ export default defineConfig({
         icons: [
           {
             // src: 'icons/icon-192x192.png',
-            src: 'icons/logoEasyCheck.png',
+            src: 'icons/logoEasyCheck192.jpeg',
             sizes: '192x192',
-            type: 'image/png',
+            type: 'image/jpeg',
           },
           {
             // src: 'icons/icon-512x512.png',
-            src: 'icons/logoEasyCheck.png',
+            src: 'icons/logoEasyCheck512.jpeg',
             sizes: '512x512',
-            type: 'image/png',
+            type: 'image/jpeg',
           },
         ],
       },
