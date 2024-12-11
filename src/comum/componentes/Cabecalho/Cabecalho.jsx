@@ -18,7 +18,7 @@ function Cabecalho() {
   return (
     <header className="cabecalho_root">
       <Link to="/">
-        <img src="/src/assets/vite.svg" alt="Logo" height={48} />
+        <img src="/src/assets/logo.svg" alt="Logo" height={20} />
       </Link>
 
       {usuarioLogado && (
