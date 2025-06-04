@@ -19,3 +19,5 @@ instanciaApi.interceptors.request.use((config) => {
 });
 
 export default instanciaApi;
+
+//teste
