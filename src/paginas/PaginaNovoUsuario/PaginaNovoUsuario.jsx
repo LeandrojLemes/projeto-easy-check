@@ -25,6 +25,7 @@ const PaginaNovoUsuario = () => {
         nome,
         email,
         senha,
+      
       };
 
       await instanciaServicoUsuarios.cadastrarUsuario(usuario);
