@@ -1,161 +1,337 @@
+// import { useState, useEffect } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import { Pie } from 'react-chartjs-2';
+// import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
+// import ChartDataLabels from 'chartjs-plugin-datalabels';
+// import BotaoCustomizado from '../../comum/componentes/BotaoCustomizado/BotaoCustomizado';
+// import Principal from '../../comum/componentes/Principal/Principal';
+// import { FaQrcode } from 'react-icons/fa';
+// import instanciaApi from '../../comum/servicos/Api';
+// import './PaginaInicial.css';
+
+// ChartJS.register(ArcElement, Tooltip, Legend, Title, ChartDataLabels);
+
+// const PaginaInicial = () => {
+//   const navigate = useNavigate();
+//   const [funcionariosAptos, setFuncionariosAptos] = useState(0);
+//   const [funcionariosNaoAptos, setFuncionariosNaoAptos] = useState(0);
+
+//   useEffect(() => {
+//     const carregarDados = async () => {
+//       try {
+//         const response = await instanciaApi.get('/clientes', {
+//           headers: {
+//             'x-usuario-id': localStorage.getItem('usuarioId'),
+//             'Content-Type': 'application/json',
+//           },
+//         });
+
+//         const clientes = response.data;
+//         let aptos = 0;
+//         let naoAptos = 0;
+        
+
+//         clientes.forEach((cliente) => {
+         
+//           const {
+//             nome,
+//             email,
+//             celular,
+//             cpf,
+//             cargo,
+//             pis,
+//             cep,
+//             rua,
+//             numero,
+//             bairro,
+//             cidade,
+//           } = cliente;
+
+//           const camposObrigatorios = [
+//             nome,
+//             email,
+//             celular,
+//             cpf,
+//             cargo,
+//             pis,
+//             cep,
+//             rua,
+//             numero,
+//             bairro,
+//             cidade,
+//           ];
+
+//           const todosCamposPreenchidos = camposObrigatorios.every((campo) => campo !== null && campo !== undefined && campo.toString().trim() !== '');
+
+
+//           if (todosCamposPreenchidos) {
+//             aptos++;
+//           } else {
+//             naoAptos++;
+//           }
+//         });
+
+//         setFuncionariosAptos(aptos);
+//         setFuncionariosNaoAptos(naoAptos);
+//       } catch (error) {
+//         console.error('Erro ao carregar dados dos clientes:', error);
+//       }
+//     };
+
+//     carregarDados();
+//   }, []);
+
+//   const data = {
+//     labels: ['Aptos', 'Pendentes'],
+//     datasets: [
+//       {
+//         label: 'Funcionários',
+//         data: [funcionariosAptos, funcionariosNaoAptos],
+//         backgroundColor: ['#4caf50', '#d32f2f'],
+//         hoverBackgroundColor: ['#388e3c', '#b71c1c'],
+//         borderColor: '#fff',
+//         borderWidth: 2,
+//       },
+//     ],
+//   };
+
+//   const options = {
+//     responsive: true,
+//     plugins: {
+//       legend: {
+//         position: 'top',
+//       },
+//       datalabels: {
+//         color: '#fff',
+//         font: {
+//           weight: 'bold',
+//           size: 16,
+//         },
+//         formatter: (value) => value,
+//         anchor: 'center',
+//         align: 'center',
+//       },
+//     },
+//   };
+
+//   return (
+//     <Principal>
+//       <div className="empresa-info">
+//         <h1 style={{ display: 'flex', alignItems: 'center' }}>
+//           Escanear QrCode
+//           <FaQrcode
+//             size={24}
+//             style={{ marginLeft: '10px', cursor: 'default' }}
+//           />
+//         </h1>
+//       </div>
+//       <div className="botoes">
+//         <div className="botao-colaborador">
+//           <BotaoCustomizado cor="primaria" aoClicar={() => navigate('/lista-clientes')}>
+//             Meus Colaboradores
+//           </BotaoCustomizado>
+//         </div>
+//         <div className="botao-novo">  
+//           <BotaoCustomizado cor="secundaria" aoClicar={() => navigate('/cadastro-cliente')}>
+//             + Novo
+//           </BotaoCustomizado>
+//         </div>
+//       </div>
+
+//       <div className="dashboards">
+//         <div className="dashboard aptos" onClick={() => navigate('/lista-clientes')}>
+//           <h3>Funcionários Aptos</h3>
+//           <p>{funcionariosAptos}</p>
+//         </div>
+//         <div className="dashboard nao-aptos" onClick={() => navigate('/lista-clientes')}>
+//           <h3>Funcionários Pendentes</h3>
+//           <p>{funcionariosNaoAptos}</p>
+//         </div>
+//       </div>
+
+//       <div className="grafico">
+//         <h3>Proporção de Funcionários</h3>
+      
+//         <Pie data={data} options={options} />
+//       </div>
+//     </Principal>
+//   );
+// };
+
+// export default PaginaInicial;
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
+import { Pie, Bar, Doughnut } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+} from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import BotaoCustomizado from '../../comum/componentes/BotaoCustomizado/BotaoCustomizado';
 import Principal from '../../comum/componentes/Principal/Principal';
-import { FaQrcode } from 'react-icons/fa';
+import { FaQrcode, FaUserCheck, FaUserTimes, FaUsers, FaPercent } from 'react-icons/fa';
 import instanciaApi from '../../comum/servicos/Api';
 import './PaginaInicial.css';
 
-ChartJS.register(ArcElement, Tooltip, Legend, Title, ChartDataLabels);
+ChartJS.register(
+  ArcElement,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+  ChartDataLabels
+);
 
-const PaginaInicial = () => {
+export default function PaginaInicial() {
   const navigate = useNavigate();
-  const [funcionariosAptos, setFuncionariosAptos] = useState(0);
-  const [funcionariosNaoAptos, setFuncionariosNaoAptos] = useState(0);
+  const [aptos, setAptos] = useState(0);
+  const [pendentes, setPendentes] = useState(0);
 
   useEffect(() => {
-    const carregarDados = async () => {
+    async function carregar() {
       try {
-        const response = await instanciaApi.get('/clientes', {
+        const { data: clientes } = await instanciaApi.get('/clientes', {
           headers: {
             'x-usuario-id': localStorage.getItem('usuarioId'),
             'Content-Type': 'application/json',
           },
         });
-
-        const clientes = response.data;
-        let aptos = 0;
-        let naoAptos = 0;
-        
-
-        clientes.forEach((cliente) => {
-         
-          const {
-            nome,
-            email,
-            celular,
-            cpf,
-            cargo,
-            pis,
-            cep,
-            rua,
-            numero,
-            bairro,
-            cidade,
-          } = cliente;
-
-          const camposObrigatorios = [
-            nome,
-            email,
-            celular,
-            cpf,
-            cargo,
-            pis,
-            cep,
-            rua,
-            numero,
-            bairro,
-            cidade,
+        let a = 0, p = 0;
+        clientes.forEach(c => {
+          const vals = [
+            c.nome, c.email, c.celular, c.cpf, c.cargo,
+            c.pis, c.cep, c.rua, c.numero, c.bairro, c.cidade
           ];
-
-          const todosCamposPreenchidos = camposObrigatorios.every((campo) => campo !== null && campo !== undefined && campo.toString().trim() !== '');
-
-
-          if (todosCamposPreenchidos) {
-            aptos++;
-          } else {
-            naoAptos++;
-          }
+          vals.every(v => v != null && v.toString().trim() !== '')
+            ? a++
+            : p++;
         });
-
-        setFuncionariosAptos(aptos);
-        setFuncionariosNaoAptos(naoAptos);
-      } catch (error) {
-        console.error('Erro ao carregar dados dos clientes:', error);
+        setAptos(a);
+        setPendentes(p);
+      } catch (e) {
+        console.error(e);
       }
-    };
-
-    carregarDados();
+    }
+    carregar();
   }, []);
 
-  const data = {
-    labels: ['Aptos', 'Pendentes'],
-    datasets: [
-      {
-        label: 'Funcionários',
-        data: [funcionariosAptos, funcionariosNaoAptos],
-        backgroundColor: ['#4caf50', '#d32f2f'],
-        hoverBackgroundColor: ['#388e3c', '#b71c1c'],
-        borderColor: '#fff',
-        borderWidth: 2,
-      },
-    ],
-  };
+  const total = aptos + pendentes;
+  const pctAptos = total ? Math.round((aptos / total) * 100) : 0;
 
-  const options = {
+  // Dados para os gráficos (mesmo que já tinha)
+  const dataPie = {
+    labels: ['Aptos', 'Pendentes'],
+    datasets: [{
+      data: [aptos, pendentes],
+      backgroundColor: ['#4caf50', '#d32f2f'],
+      borderColor: '#fff',
+      borderWidth: 2,
+    }],
+  };
+  const optsPie = { responsive: true, plugins: { legend: { position: 'top' } } };
+
+  const dataBar = (label, value, color) => ({
+    labels: [label],
+    datasets: [{ data: [value], backgroundColor: color }]
+  });
+  const optsBar = { indexAxis: 'y', responsive: true, plugins: { legend: { display: false } } };
+
+  const dataDough = {
+    labels: ['%', ''],
+    datasets: [{
+      data: [pctAptos, 100 - pctAptos],
+      backgroundColor: ['#4caf50', '#f0f0f0'],
+      cutout: '80%',
+      borderWidth: 0,
+    }],
+  };
+  const optsDough = {
     responsive: true,
     plugins: {
-      legend: {
-        position: 'top',
-      },
+      legend: { display: false },
       datalabels: {
-        color: '#fff',
-        font: {
-          weight: 'bold',
-          size: 16,
-        },
-        formatter: (value) => value,
+        color: '#4caf50',
+        font: { weight: 'bold', size: 20 },
+        formatter: () => `${pctAptos}%`,
         anchor: 'center',
-        align: 'center',
-      },
-    },
+        align: 'center'
+      }
+    }
   };
 
   return (
     <Principal>
-      <div className="empresa-info">
-        <h1 style={{ display: 'flex', alignItems: 'center' }}>
-          Escanear QrCode
-          <FaQrcode
-            size={24}
-            style={{ marginLeft: '10px', cursor: 'default' }}
-          />
+      <header className="pi-header">
+        <h1>
+          <FaQrcode /> Escanear QrCode
         </h1>
-      </div>
-      <div className="botoes">
-        <div className="botao-colaborador">
-          <BotaoCustomizado cor="primaria" aoClicar={() => navigate('/lista-clientes')}>
-            Meus Colaboradores
-          </BotaoCustomizado>
+        <div className="pi-actions">
+          <BotaoCustomizado
+            cor="primaria"
+            aoClicar={() => navigate('/lista-clientes')}
+          >Meus Colaboradores</BotaoCustomizado>
+          <BotaoCustomizado
+            cor="secundaria"
+            aoClicar={() => navigate('/cadastro-cliente')}
+          >+ Novo</BotaoCustomizado>
         </div>
-        <div className="botao-novo">  
-          <BotaoCustomizado cor="secundaria" aoClicar={() => navigate('/cadastro-cliente')}>
-            + Novo
-          </BotaoCustomizado>
-        </div>
-      </div>
+      </header>
 
-      <div className="dashboards">
-        <div className="dashboard aptos" onClick={() => navigate('/lista-clientes')}>
-          <h3>Funcionários Aptos</h3>
-          <p>{funcionariosAptos}</p>
+      <section className="stats-grid">
+        <div className="stat-card verde">
+          <FaUserCheck className="icon" />
+          <div>
+            <span className="stat-label">Aptos</span>
+            <span className="stat-value">{aptos}</span>
+          </div>
         </div>
-        <div className="dashboard nao-aptos" onClick={() => navigate('/lista-clientes')}>
-          <h3>Funcionários Pendentes</h3>
-          <p>{funcionariosNaoAptos}</p>
+        <div className="stat-card vermelho">
+          <FaUserTimes className="icon" />
+          <div>
+            <span className="stat-label">Pendentes</span>
+            <span className="stat-value">{pendentes}</span>
+          </div>
         </div>
-      </div>
+        <div className="stat-card azul">
+          <FaUsers className="icon" />
+          <div>
+            <span className="stat-label">Total</span>
+            <span className="stat-value">{total}</span>
+          </div>
+        </div>
+        <div className="stat-card laranja">
+          <FaPercent className="icon" />
+          <div>
+            <span className="stat-label">% Aptos</span>
+            <span className="stat-value">{pctAptos}%</span>
+          </div>
+        </div>
+      </section>
 
-      <div className="grafico">
-        <h3>Proporção de Funcionários</h3>
-      
-        <Pie data={data} options={options} />
-      </div>
+      <section className="charts-grid">
+        <div className="chart-card">
+          <h3>Proporção</h3>
+          <Pie data={dataPie} options={optsPie} />
+        </div>
+        <div className="chart-card">
+          <h3>Aptos</h3>
+          <Bar data={dataBar('Aptos', aptos, '#4caf50')} options={optsBar} />
+        </div>
+        <div className="chart-card">
+          <h3>Pendentes</h3>
+          <Bar data={dataBar('Pendentes', pendentes, '#d32f2f')} options={optsBar} />
+        </div>
+        <div className="chart-card">
+          <h3>% Aptos</h3>
+          <Doughnut data={dataDough} options={optsDough} />
+        </div>
+      </section>
     </Principal>
   );
-};
-
-export default PaginaInicial;
+}
