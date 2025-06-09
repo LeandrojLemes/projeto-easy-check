@@ -176,165 +176,137 @@ body {
     font-size: 1.4rem;
   }
 } */
+/* PaginaInicial.css */
 
-/* ======================================
-   Variáveis de cor
-   ====================================== */
+/* Variáveis de cor e fonte */
 :root {
-  --primary-green: #2ecc71;
-  --primary-green-dark: #27ae60;
-  --secondary-red: #e74c3c;
-  --bg-light: #f9f9f9;
-  --bg-card: #ffffff;
-  --text-dark: #2c3e50;
-  --border-grey: #d1d5db;
+  --verde-primario: #4caf50;
+  --verde-escuro:  #388e3c;
+  --vermelho-pendente: #d32f2f;
+  --vermelho-escuro:    #b71c1c;
+  --cinza-fundo:        #f9f9f9;
+  --cinza-claro:        #ffffff;
+  --sombra:             rgba(0, 0, 0, 0.1);
+  --fonte-principal:    'Roboto', sans-serif;
 }
 
-/* ======================================
-   Reset e Estilo Geral
-   ====================================== */
-* {
-  box-sizing: border-box;
+body {
+  background-color: var(--cinza-fundo);
+  font-family: var(--fonte-principal);
   margin: 0;
   padding: 0;
 }
 
-body {
-  font-family: 'Roboto', sans-serif;
-  line-height: 1.5;
-  color: var(--text-dark);
-  background-color: var(--bg-light);
+/* Título e QR Code */
+.empresa-info {
+  padding: 1.5rem 1rem 0.5rem;
+}
+.empresa-info h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--verde-primario);
+  display: flex;
+  align-items: center;
+}
+.empresa-info h1 svg {
+  margin-left: 0.5rem;
+  color: var(--verde-primario);
 }
 
-.page-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-
-/* ======================================
-   Botões
-   ====================================== */
+/* Botões principais */
 .botoes {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 2rem;
+  margin: 1rem;
+}
+.botoes .botao-colaborador,
+.botoes .botao-novo {
+  flex: 1 1 200px; /* mínimo 200px, distribui igualmente */
+  max-width: 240px;
 }
 
-.botao-colaborador,
-.botao-novo {
-  background-color: var(--primary-green);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
-}
-
-.botao-colaborador:hover,
-.botao-novo:hover {
-  background-color: var(--primary-green-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* ======================================
-   Dashboard Cards
-   ====================================== */
+/* Cards de estatísticas */
 .dashboards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 0 1rem 2rem;
+}
+.dashboard {
+  background-color: var(--cinza-claro);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px var(--sombra);
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.dashboard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px var(--sombra);
+}
+.dashboard h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  color: #555;
+}
+.dashboard p {
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #333;
+}
+.dashboard.aptos h3 {
+  color: var(--verde-primario);
+}
+.dashboard.nao-aptos h3 {
+  color: var(--vermelho-pendente);
 }
 
-.dashboard {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-grey);
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  padding: 1rem;
+/* Gráfico */
+.grafico {
+  background-color: var(--cinza-claro);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px var(--sombra);
+  padding: 1.5rem;
+  margin: 0 1rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
-  cursor: pointer;
 }
-
-.dashboard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-}
-
-.dashboard.aptos {
-  border-color: var(--primary-green);
-}
-
-.dashboard.nao-aptos {
-  border-color: var(--secondary-red);
-}
-
-.dashboard h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.dashboard p {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--text-dark);
-}
-
-/* ======================================
-   Gráficos
-   ====================================== */
-.graficos {
-  margin-top: 2rem;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-}
-
-.grafico {
-  background-color: var(--bg-card);
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-
 .grafico h3 {
+  margin: 0 0 1rem;
   font-size: 1.2rem;
-  color: var(--primary-green-dark);
-  margin-bottom: 1rem;
-  text-align: center;
+  color: var(--verde-primario);
 }
-
 .grafico canvas {
-  width: 100% !important;
+  max-width: 100%;
   height: auto !important;
 }
 
-/* ======================================
-   Responsividade
-   ====================================== */
-@media (min-width: 768px) {
-  .graficos {
-    grid-template-columns: repeat(2, 1fr);
+/* Ajustes para telas maiores */
+@media (min-width: 600px) {
+  .botoes {
+    justify-content: flex-start;
+    margin: 1rem 2rem;
+  }
+  .empresa-info {
+    padding: 1.5rem 2rem 0.5rem;
+  }
+  .grafico {
+    margin: 0 auto 2rem;
+    max-width: 800px;
   }
 }
 
-@media (min-width: 1200px) {
-  .graficos {
-    grid-template-columns: repeat(3, 1fr);
+/* Ajuste fino em mobile */
+@media (max-width: 400px) {
+  .empresa-info h1 {
+    font-size: 1.6rem;
+  }
+  .dashboard p {
+    font-size: 1.8rem;
   }
 }
-  
