@@ -140,8 +140,8 @@ export default function PaginaInicial() {
         </div>
         <div className="stat-card azul">
           <FaUsers className="icon" />
-          <div>
-            <span   aoClicar={() => navigate('/lista-clientes')}
+          <div aoClicar={() => navigate('/lista-clientes')}>
+            <span
              className="stat-label">Total</span>
             <span className="stat-value">{total}</span>
           </div>
