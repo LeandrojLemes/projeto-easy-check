@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Pie, Bar, Doughnut } from 'react-chartjs-2';
@@ -64,7 +63,6 @@ export default function PaginaInicial() {
   const total = aptos + pendentes;
   const pctAptos = total ? Math.round((aptos / total) * 100) : 0;
 
-
   const dataPie = {
     labels: ['Aptos', 'Pendentes'],
     datasets: [{
@@ -124,28 +122,42 @@ export default function PaginaInicial() {
       </header>
 
       <section className="stats-grid">
-        <div className="stat-card verde">
+        <div
+          className="stat-card verde"
+          onClick={() => navigate('/lista-clientes?status=apto')}
+          style={{ cursor: 'pointer' }}
+        >
           <FaUserCheck className="icon" />
           <div>
             <span className="stat-label">Aptos</span>
             <span className="stat-value">{aptos}</span>
           </div>
         </div>
-        <div className="stat-card vermelho">
+
+        <div
+          className="stat-card vermelho"
+          onClick={() => navigate('/lista-clientes?status=pendente')}
+          style={{ cursor: 'pointer' }}
+        >
           <FaUserTimes className="icon" />
           <div>
             <span className="stat-label">Pendentes</span>
             <span className="stat-value">{pendentes}</span>
           </div>
         </div>
-        <div className="stat-card azul">
+
+        <div
+          className="stat-card azul"
+          onClick={() => navigate('/lista-clientes')}
+          style={{ cursor: 'pointer' }}
+        >
           <FaUsers className="icon" />
-          <div aoClicar={() => navigate('/lista-clientes')}>
-            <span
-             className="stat-label">Total</span>
+          <div>
+            <span className="stat-label">Total</span>
             <span className="stat-value">{total}</span>
           </div>
         </div>
+
         <div className="stat-card laranja">
           <FaPercent className="icon" />
           <div>
