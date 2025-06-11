@@ -93,7 +93,7 @@ const PaginaCadastroCliente = () => {
   };
 
   return (
-    <Principal titulo={params?.id ? 'Editar Cliente' : 'Novo Colaborador '} voltarPara="/lista-clientes">
+    <Principal titulo={params?.id ? 'Editar Colaborador' : 'Novo Colaborador '} voltarPara="/lista-clientes">
       {carregando ? (
         <p>Carregando...</p>
       ) : (
