@@ -22,29 +22,29 @@ body,
 }
 
 :root {
-  /* Cores primárias e secundárias */
-  --cor-primaria-clara: #5ecb64; /* Verde mais suave, moderno e vibrante */
-  --cor-primaria: #3b9e3f; /* Verde médio, profundo e profissional */
-  --cor-primaria-escura: #2f7b33; /* Verde escuro, sofisticado e confiável */
+  
+  --cor-primaria-clara: #5ecb64; 
+  --cor-primaria: #2fa130; 
+  --cor-primaria-escura: #2f7b33; 
 
-  --cor-secundaria-clara: #91e7a3; /* Verde menta, moderno e relaxante */
-  --cor-secundaria: #4baf4f; /* Verde médio com um toque mais natural */
-  --cor-secundaria-escura: #3c8e3e; /* Verde escuro com leve profundidade */
+  --cor-secundaria-clara: #91e7a3; 
+  --cor-secundaria: #4baf4f; 
+  --cor-secundaria-escura: #3c8e3e; 
 
-  /* Fundo */
-  --cor-fundo-padrao: #f4f9f4; /* Branco-esverdeado suave, mais moderno e limpo */
 
-  /* Texto */
-  --cor-texto-padrao: #245828; /* Verde muito escuro para maior sofisticação */
-  --cor-texto-claro: #ffffff; /* Branco para contraste em fundos escuros */
+  --cor-fundo-padrao: #f4f9f4; 
 
-  /* Cores de status */
-  --cor-info: #66bb6a; /* Verde confiante e vivo */
-  --cor-sucesso: #2e7031; /* Verde muito estável para indicações de sucesso */
-  --cor-aviso: #8fd7a3; /* Verde pastel para avisos suaves */
-  --cor-erro: #e53935; /* Vermelho vibrante para erros */
+ 
+  --cor-texto-padrao: #245828; 
+  --cor-texto-claro: #ffffff;
 
-  /* Neutros */
-  --cor-cinza: #d6dadb; /* Cinza claro para suavizar áreas secundárias */
-  --cor-cinza-escuro: #607d8b; /* Cinza médio para contrastes elegantes */
+  
+  --cor-info: #66bb6a;
+  --cor-sucesso: #2e7031; 
+  --cor-aviso: #8fd7a3; 
+  --cor-erro: #e53935; 
+
+
+  --cor-cinza: #d6dadb; 
+  --cor-cinza-escuro: #607d8b; 
 }

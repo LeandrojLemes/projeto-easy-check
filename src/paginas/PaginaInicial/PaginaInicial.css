@@ -202,7 +202,7 @@ body {
   margin-top: 0.5rem;
 }
 
-/* Grid de estatísticas */
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
@@ -229,16 +229,16 @@ body {
 .stat-value {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #333;
+  color: #fef7f7;
 }
 
-/* bordas coloridas */
+
 .stat-card.verde { border-left: 4px solid #4caf50; }
 .stat-card.vermelho { border-left: 4px solid #d32f2f; }
 .stat-card.azul { border-left: 4px solid #1976d2; }
 .stat-card.laranja { border-left: 4px solid #ffa000; }
 
-/* Grid de gráficos */
+
 .charts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
@@ -257,7 +257,7 @@ body {
   color: #333;
 }
 
-/* Responsividade fina */
+
 @media (max-width: 500px) {
   .pi-header {
     flex-direction: column;
