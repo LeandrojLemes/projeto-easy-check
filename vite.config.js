@@ -16,7 +16,7 @@ export default defineConfig({
       manifest: {
         name: 'Easy Check',
         short_name: 'Easy Check',
-        description: 'É um projeto para...',
+        description: 'É um projeto para o cadastro e a verificação ágil de documentos de colaboradores de uma certa empresa!',
         theme_color: '#ffffff',
         background_color: '#ffffff',
         display: 'standalone',

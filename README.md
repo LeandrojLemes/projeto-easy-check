@@ -1,13 +1,13 @@
-# aulas-frontend-pwa
+# Projeto Easy Check
 
-Aulas de frontend(ReacJS) + PWA ministrada na dissiciplina Programação de Aplicativos da 2ª fase 2024/2 do curso técnico em programação do SENAI/SC.
+Projeto desenvolvido no Curso técnico Senai.
 
 ## Rodando localmente
 
 Clone o projeto:
 
 ```bash
-  git clone https://github.com/thiagocordeirooo/aulas-frontend-senai.git
+  git clone https://github.com/LeandrojLemes/projeto-easy-check.git
 ```
 
 Entre no diretório do projeto:

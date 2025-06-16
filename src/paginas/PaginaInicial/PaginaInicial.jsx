@@ -188,6 +188,12 @@
 //     </Principal>
 //   );
 // }
+
+
+
+
+
+
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Pie, Bar, Doughnut } from 'react-chartjs-2';
@@ -297,7 +303,7 @@ export default function PaginaInicial() {
     <Principal>
       <header className="pi-header">
         <h1>
-          <FaQrcode /> Escanear QrCode
+          Pesquisar
         </h1>
     
         <Box display="flex" justifyContent="center" gap={2} mt={2}>
