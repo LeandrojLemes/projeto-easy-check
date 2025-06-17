@@ -1,3 +1,4 @@
+
 // import { useState, useEffect } from 'react';
 // import { useNavigate } from 'react-router-dom';
 // import { Pie, Bar, Doughnut } from 'react-chartjs-2';
@@ -11,7 +12,7 @@
 //   BarElement,
 // } from 'chart.js';
 // import ChartDataLabels from 'chartjs-plugin-datalabels';
-// import BotaoCustomizado from '../../comum/componentes/BotaoCustomizado/BotaoCustomizado';
+// import { Box, Button } from '@mui/material';
 // import Principal from '../../comum/componentes/Principal/Principal';
 // import { FaQrcode, FaUserCheck, FaUserTimes, FaUsers, FaPercent } from 'react-icons/fa';
 // import instanciaApi from '../../comum/servicos/Api';
@@ -107,18 +108,41 @@
 //     <Principal>
 //       <header className="pi-header">
 //         <h1>
-//           <FaQrcode /> Escanear QrCode
+//           Pesquisar
 //         </h1>
-//         <div className="pi-actions">
-//           <BotaoCustomizado
-//             cor="primaria"
-//             aoClicar={() => navigate('/lista-clientes')}
-//           >Meus Colaboradores</BotaoCustomizado>
-//           <BotaoCustomizado
-//             cor="secundaria"
-//             aoClicar={() => navigate('/cadastro-cliente')}
-//           >+ Novo</BotaoCustomizado>
-//         </div>
+    
+//         <Box display="flex" justifyContent="center" gap={2} mt={2}>
+//           <Button
+//             variant="contained"
+//             onClick={() => navigate('/lista-clientes')}
+//             sx={{
+//               backgroundColor: '#607d8b',
+//               '&:hover': { backgroundColor: '#2fa130' },
+//               borderRadius: 2,
+//               py: 1.5,
+//               px: 3,
+//               fontWeight: 'bold',
+//               boxShadow: 1,
+//             }}
+//           >
+//             Meus Colaboradores
+//           </Button>
+//           <Button
+//             variant="contained"
+//             onClick={() => navigate('/cadastro-cliente')}
+//             sx={{
+//               backgroundColor: '#607d8b',
+//               '&:hover': { backgroundColor: '#2fa130' },
+//               borderRadius: 2,
+//               py: 1.5,
+//               px: 3,
+//               fontWeight: 'bold',
+//               boxShadow: 1,
+//             }}
+//           >
+//             + Novo
+//           </Button>
+//         </Box>
 //       </header>
 
 //       <section className="stats-grid">
@@ -174,7 +198,7 @@
 //         </div>
 //         <div className="chart-card">
 //           <h3>Aptos</h3>
-//           <Bar data={dataBar('Aptos', aptos, '#4caf50')} options={optsBar} />
+//           <Bar data={dataBar('Aptos', aptos, '#2fa130')} options={optsBar} />
 //         </div>
 //         <div className="chart-card">
 //           <h3>Pendentes</h3>
@@ -188,12 +212,6 @@
 //     </Principal>
 //   );
 // }
-
-
-
-
-
-
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Pie, Bar, Doughnut } from 'react-chartjs-2';
@@ -227,11 +245,12 @@ export default function PaginaInicial() {
   const navigate = useNavigate();
   const [aptos, setAptos] = useState(0);
   const [pendentes, setPendentes] = useState(0);
+  const [cpfBusca, setCpfBusca] = useState('');
 
   useEffect(() => {
     async function carregar() {
       try {
-        const { data: clientes } = await instanciaApi.get('/clientes', {
+        const { data: clientes } = await instanciaApi.get('/cadastro-clientes', {
           headers: {
             'x-usuario-id': localStorage.getItem('usuarioId'),
             'Content-Type': 'application/json',
@@ -255,6 +274,31 @@ export default function PaginaInicial() {
     }
     carregar();
   }, []);
+
+  const buscarColaboradorPorCpf = async () => {
+    if (!cpfBusca.trim()) return;
+
+    try {
+      const { data: clientes } = await instanciaApi.get('/editar-cliente', {
+        headers: {
+          'x-usuario-id': localStorage.getItem('usuarioId'),
+        },
+      });
+
+      const clienteEncontrado = clientes.find(
+        (c) => c.cpf.replace(/\D/g, '') === cpfBusca.replace(/\D/g, '')
+      );
+
+      if (clienteEncontrado) {
+        navigate(`/editar-cliente/${clienteEncontrado.id_cliente}`);
+      } else {
+        alert('Colaborador não encontrado com esse CPF');
+      }
+    } catch (e) {
+      console.error('Erro ao buscar CPF:', e);
+      alert('Erro ao buscar colaborador');
+    }
+  };
 
   const total = aptos + pendentes;
   const pctAptos = total ? Math.round((aptos / total) * 100) : 0;
@@ -302,10 +346,41 @@ export default function PaginaInicial() {
   return (
     <Principal>
       <header className="pi-header">
-        <h1>
-          Pesquisar
-        </h1>
-    
+
+        <Box display="flex" justifyContent="center" alignItems="center" gap={2} mt={2}>
+          <input
+            type="text"
+            placeholder="Digite o CPF"
+            value={cpfBusca}  
+            onChange={(e) => setCpfBusca(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') buscarColaboradorPorCpf();
+            }}
+            style={{
+              padding: '10px',
+              borderRadius: '8px',
+              border: '1px solid #ccc',
+              width: '250px',
+              fontSize: '16px',
+            }}
+          />
+          <Button
+            variant="contained"
+            onClick={buscarColaboradorPorCpf}
+            sx={{
+              backgroundColor: '#2fa130',
+              '&:hover': { backgroundColor: '#1c7c25' },
+              fontWeight: 'bold',
+              borderRadius: 2,
+              py: 1,
+              px: 3,
+            }}
+          >
+            Buscar CPF
+          </Button>
+        </Box>
+
+        {/* Botões principais */}
         <Box display="flex" justifyContent="center" gap={2} mt={2}>
           <Button
             variant="contained"
@@ -373,7 +448,7 @@ export default function PaginaInicial() {
           <FaUsers className="icon" />
           <div>
             <span className="stat-label">Total</span>
-            <span className="stat-value">{total}</span>
+            <span className="stat-value">{aptos + pendentes}</span>
           </div>
         </div>
 
