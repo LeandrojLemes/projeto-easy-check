@@ -37,7 +37,7 @@ export default function PaginaInicial() {
   useEffect(() => {
     async function carregar() {
       try {
-        const { data: clientes } = await instanciaApi.get('/clientes', {
+        const { data: clientes } = await instanciaApi.get('/cadastro-clientes', {
           headers: {
             'x-usuario-id': localStorage.getItem('usuarioId'),
             'Content-Type': 'application/json',
