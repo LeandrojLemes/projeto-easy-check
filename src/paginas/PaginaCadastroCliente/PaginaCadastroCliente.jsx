@@ -207,4 +207,3 @@ const PaginaCadastroCliente = () => {
 };
 
 export default PaginaCadastroCliente;
-
