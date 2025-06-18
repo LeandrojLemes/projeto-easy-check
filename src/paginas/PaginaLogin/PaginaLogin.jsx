@@ -23,7 +23,7 @@ const PaginaLogin = () => {
 
       const usuario = await instanciaServicoAutenticacao.login(email, senha);
 
-     
+      // ✅ Linha que garante o funcionamento correto da API
       localStorage.setItem('usuarioId', usuario.id);
 
       navigate('/'); 

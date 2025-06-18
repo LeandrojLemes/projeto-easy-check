@@ -31,12 +31,12 @@ export default function PaginaInicial() {
   const navigate = useNavigate();
   const [aptos, setAptos] = useState(0);
   const [pendentes, setPendentes] = useState(0);
-  const [cpfBusca, setCpfBusca] = useState('');
+  const [cpfPesquisa, setCpfPesquisa] = useState('');
 
   useEffect(() => {
     async function carregar() {
       try {
-        const { data: clientes } = await instanciaApi.get('/cadastro-clientes', {
+        const { data: clientes } = await instanciaApi.get('/clientes', {
           headers: {
             'x-usuario-id': localStorage.getItem('usuarioId'),
             'Content-Type': 'application/json',
@@ -60,31 +60,6 @@ export default function PaginaInicial() {
     }
     carregar();
   }, []);
-
-  const buscarColaboradorPorCpf = async () => {
-    if (!cpfBusca.trim()) return;
-
-    try {
-      const { data: clientes } = await instanciaApi.get('/editar-cliente', {
-        headers: {
-          'x-usuario-id': localStorage.getItem('usuarioId'),
-        },
-      });
-
-      const clienteEncontrado = clientes.find(
-        (c) => c.cpf.replace(/\D/g, '') === cpfBusca.replace(/\D/g, '')
-      );
-
-      if (clienteEncontrado) {
-        navigate(`/editar-cliente/${clienteEncontrado.id_cliente}`);
-      } else {
-        alert('Colaborador não encontrado com esse CPF');
-      }
-    } catch (e) {
-      console.error('Erro ao buscar CPF:', e);
-      alert('Erro ao buscar colaborador');
-    }
-  };
 
   const total = aptos + pendentes;
   const pctAptos = total ? Math.round((aptos / total) * 100) : 0;
@@ -132,42 +107,42 @@ export default function PaginaInicial() {
   return (
     <Principal>
       <header className="pi-header">
+        <h1>Pesquisar</h1>
 
-        <Box display="flex" justifyContent="center" alignItems="center" gap={2} mt={2}>
+        <Box display="flex" justifyContent="center" alignItems="center" gap={2} mt={2} flexWrap="wrap">
           <input
             type="text"
-            placeholder="Digite o CPF"
-            value={cpfBusca}  
-            onChange={(e) => setCpfBusca(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') buscarColaboradorPorCpf();
-            }}
+            placeholder="Digite o CPF do colaborador"
+            value={cpfPesquisa}
+            onChange={(e) => setCpfPesquisa(e.target.value)}
             style={{
               padding: '10px',
               borderRadius: '8px',
               border: '1px solid #ccc',
               width: '250px',
-              fontSize: '16px',
             }}
           />
+
           <Button
             variant="contained"
-            onClick={buscarColaboradorPorCpf}
+            onClick={() => {
+              if (cpfPesquisa.trim()) {
+                navigate(`/editar-cliente/${cpfPesquisa}`);
+              }
+            }}
             sx={{
               backgroundColor: '#2fa130',
-              '&:hover': { backgroundColor: '#1c7c25' },
-              fontWeight: 'bold',
+              '&:hover': { backgroundColor: '#1e7e24' },
               borderRadius: 2,
-              py: 1,
+              py: 1.5,
               px: 3,
+              fontWeight: 'bold',
+              boxShadow: 1,
             }}
           >
             Buscar CPF
           </Button>
-        </Box>
 
-        {/* Botões principais */}
-        <Box display="flex" justifyContent="center" gap={2} mt={2}>
           <Button
             variant="contained"
             onClick={() => navigate('/lista-clientes')}
@@ -234,7 +209,7 @@ export default function PaginaInicial() {
           <FaUsers className="icon" />
           <div>
             <span className="stat-label">Total</span>
-            <span className="stat-value">{aptos + pendentes}</span>
+            <span className="stat-value">{total}</span>
           </div>
         </div>
 
