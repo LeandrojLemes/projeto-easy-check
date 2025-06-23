@@ -107,7 +107,7 @@ export default function PaginaInicial() {
   return (
     <Principal>
       <header className="pi-header">
-        <h1>Pesquisar</h1>
+    
 
         <Box display="flex" justifyContent="center" alignItems="center" gap={2} mt={2} flexWrap="wrap">
           <input
