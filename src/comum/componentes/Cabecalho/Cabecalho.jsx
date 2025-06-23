@@ -18,7 +18,7 @@ function Cabecalho() {
   const sair = async () => {
     setCarregando(true);
     await instanciaServicoAutenticacao.sair();
-    toast.success('Você saiu com sucesso!');
+    toast.success('Você Saiu. Até logo!');
     setCarregando(false);
     navigate('/login');
   };
