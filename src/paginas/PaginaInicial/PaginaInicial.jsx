@@ -116,10 +116,10 @@ export default function PaginaInicial() {
             value={cpfPesquisa}
             onChange={(e) => setCpfPesquisa(e.target.value)}
             style={{
-              padding: '10px',
+              padding: '15px',
               borderRadius: '8px',
               border: '1px solid #ccc',
-              width: '250px',
+              width: '350px',
             }}
           />
 
