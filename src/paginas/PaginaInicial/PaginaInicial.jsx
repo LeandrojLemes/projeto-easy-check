@@ -391,67 +391,75 @@ export default function PaginaInicial() {
   return (
     <Principal>
       <header className="pi-header">
-        <Box display="flex" justifyContent="center" alignItems="center" gap={2} mt={2} flexWrap="wrap">
-          <input
-            type="text"
-            placeholder="Digite o CPF do colaborador"
-            value={cpfPesquisa}
-            onChange={(e) => setCpfPesquisa(e.target.value)}
-            style={{
-              padding: '15px',
-              borderRadius: '8px',
-              border: '1px solid #ccc',
-              width: '350px',
-            }}
-          />
+        <Box display="flex" justifyContent="space-between" alignItems="center" mt={2} flexWrap="wrap" width="100%">
 
-          <Button
-            variant="contained"
-            onClick={buscarClientePorCpf}
-            sx={{
-              backgroundColor: '#2fa130',
-              '&:hover': { backgroundColor: '#1e7e24' },
-              borderRadius: 2,
-              py: 1.5,
-              px: 3,
-              fontWeight: 'bold',
-              boxShadow: 1,
-            }}
-          >
-            Buscar CPF
-          </Button>
+          <Box sx={{ display: "flex", width: "40%", gap: "1rem" }}>
+            <input
+              type="text"
+              placeholder="Digite o CPF do colaborador"
+              value={cpfPesquisa}
+              onChange={(e) => setCpfPesquisa(e.target.value)}
+              style={{
+                padding: '18px',
+                borderRadius: '8px',
+                border: '1px solid #ccc',
+                width: '400px'
+              }}
+            />
 
-          <Button
-            variant="contained"
-            onClick={() => navigate('/lista-clientes')}
-            sx={{
-              backgroundColor: '#607d8b',
-              '&:hover': { backgroundColor: '#2fa130' },
-              borderRadius: 2,
-              py: 1.5,
-              px: 3,
-              fontWeight: 'bold',
-              boxShadow: 1,
-            }}
-          >
-            Meus Colaboradores
-          </Button>
+            <Button
+              variant="contained"
+              onClick={buscarClientePorCpf}
+              sx={{
+                backgroundColor: '#2fa130',
+                '&:hover': { backgroundColor: '#1e7e24' },
+                borderRadius: 2,
+                py: 1.5,
+                px: 3,
+                fontWeight: 'bold',
+                boxShadow: 1,
+              }}
+            >
+              Buscar CPF
+            </Button>
 
-          <Button
-            variant="contained"
-            onClick={() => navigate('/cadastro-cliente')}
-            sx={{
-              backgroundColor: '#607d8b',
-              '&:hover': { backgroundColor: '#2fa130' },
-              borderRadius: 2,
-              py: 1.5,
-              px: 3,
-              fontWeight: 'bold',
-              boxShadow: 1,
-            }}
-          >
-            + Novo
-          </Button>
+          </Box>
+
+          <Box sx={{ display: "flex", justifyContent: "flex-end", width: "60%", gap: "1rem" }}>
+
+            <Button
+              variant="contained"
+              onClick={() => navigate('/lista-clientes')}
+              sx={{
+                backgroundColor: '#607d8b',
+                '&:hover': { backgroundColor: '#2fa130' },
+                borderRadius: 2,
+                py: 1.5,
+                px: 3,
+                fontWeight: 'bold',
+                boxShadow: 1,
+              }}
+            >
+              Meus Colaboradores
+            </Button>
+
+            <Button
+              variant="contained"
+              onClick={() => navigate('/cadastro-cliente')}
+              sx={{
+                backgroundColor: '#607d8b',
+                '&:hover': { backgroundColor: '#2fa130' },
+                borderRadius: 2,
+                py: 1.5,
+                px: 3,
+                fontWeight: 'bold',
+                boxShadow: 1,
+              }}
+            >
+              + Novo
+            </Button>
+          </Box>
+
         </Box>
       </header>
 
