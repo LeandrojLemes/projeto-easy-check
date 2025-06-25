@@ -403,7 +403,7 @@ export default function PaginaInicial() {
                 padding: '18px',
                 borderRadius: '8px',
                 border: '1px solid #ccc',
-                width: '400px'
+                width: '350px'
               }}
             />
 
