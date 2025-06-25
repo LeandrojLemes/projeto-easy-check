@@ -393,7 +393,7 @@ export default function PaginaInicial() {
       <header className="pi-header">
         <Box display="flex" justifyContent="space-between" alignItems="center" mt={2} flexWrap="wrap" width="100%">
 
-          <Box sx={{ display: "flex", width: "40%", gap: "1rem" }}>
+          <Box sx={{ display: "flex", width: "60%", gap: "1rem" }}>
             <input
               type="text"
               placeholder="Digite o CPF do colaborador"
@@ -425,7 +425,7 @@ export default function PaginaInicial() {
 
           </Box>
 
-          <Box sx={{ display: "flex", justifyContent: "flex-end", width: "60%", gap: "1rem" }}>
+          <Box sx={{ display: "flex", justifyContent: "flex-end", width: "40%", gap: "1rem" }}>
 
             <Button
               variant="contained"
