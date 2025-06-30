@@ -187,10 +187,10 @@ const PaginaListaClientes = () => {
     if (estadoEditavel) {
       const parsed = JSON.parse(estadoEditavel);
       const todasMarcadas = Object.values(parsed).every((v) => v === true);
-      return todasMarcadas; // Só retorna true (apto) se TODAS as checkbox estiverem marcadas
+      return todasMarcadas; 
     }
 
-    return false; // Sem estado salvo = não apto (vermelho)
+    return false; 
   };
 
   const navegarParaEdicao = (idCliente) => {
@@ -229,7 +229,7 @@ const PaginaListaClientes = () => {
   return (
     <Principal titulo="Meus Colaboradores" voltarPara="/">
       <Link to="/cadastro-cliente" className="pagina-lista-clientes__novo">
-        + Novo Colaborador
+   Cadastrar Colaborador
       </Link>
 
       {carregando ? (
