@@ -551,7 +551,7 @@ ChartJS.register(
 
 export default function PaginaInicial() {
   const navigate = useNavigate();
-  const location = useLocation();//adicionar esta linha location que será adicionado a Array [location]
+  const location = useLocation();
 
 
   const [aptos, setAptos] = useState(0);
@@ -577,13 +577,13 @@ export default function PaginaInicial() {
 
           const todosCamposPreenchidos = campos.every(
             v => v != null && v.toString().trim() !== ''
-          ); //adicionado apartir deste ponto a alteração
+          ); 
 
           const id = c.id || c.id_cliente;
           const editavelRaw = localStorage.getItem(`editavel-${id}`);
           const editavel = editavelRaw ? JSON.parse(editavelRaw) : null;
 
-          const ehNovo = !id; // sem id, foi recém-cadastrado
+          const ehNovo = !id; 
           const todosCheckboxMarcados = ehNovo || (editavel ? Object.values(editavel).every(v => v === true) : false);
 
           if (todosCamposPreenchidos && todosCheckboxMarcados) {
@@ -591,8 +591,7 @@ export default function PaginaInicial() {
           } else {
             p++;
           }
-        });//termina aqui a alteração
-
+        });
         setAptos(a);
         setPendentes(p);
       } catch (e) {
@@ -601,7 +600,7 @@ export default function PaginaInicial() {
     }
 
     carregar();
-  }, [location]);//adiciona location dentro da array
+  }, [location]);
 
   const total = aptos + pendentes;
   const pctAptos = total ? Math.round((aptos / total) * 100) : 0;
@@ -689,15 +688,15 @@ export default function PaginaInicial() {
     <Principal>
       <header className="pi-header">
         <Box display="flex" justifyContent="center" alignItems="center"  mt={2} flexWrap="wrap" width="100%">
-          {/* retirou após alignItems="center" o  gap={2}  e adicionou Width 100%* após flexWarp="warp"*/}
-          <Box sx={{ display: "flex", width: "60%", gap: "1rem" }}>  {/* Box "adicionou esta linha"*/}
+         
+          <Box sx={{ display: "flex", width: "60%", gap: "1rem" }}>  
             <input
               type="text"
               placeholder="Digite o CPF do colaborador"
               value={cpfPesquisa}
               onChange={(e) => setCpfPesquisa(e.target.value)}
               style={{
-                padding: '18px', //aumentou de 15 para 18
+                padding: '18px', 
                 borderRadius: '8px',
                 border: '1px solid #ccc',
                 width: '350px',
@@ -716,9 +715,9 @@ export default function PaginaInicial() {
               Buscar CPF
             </Button>
 
-          </Box>{/* Fim do Box "da linha criada"*/}
+          </Box>
 
-          <Box sx={{ display: "flex", justifyContent: "flex-end", width: "40%", gap: "1rem" }}> {/* adicionou esta linha*/}
+          <Box sx={{ display: "flex", justifyContent: "flex-end", width: "40%", gap: "1rem" }}> 
 
             <Button variant="contained" onClick={() => navigate('/lista-clientes')}
               sx={{
@@ -745,7 +744,7 @@ export default function PaginaInicial() {
               }}>
               + Novo
             </Button>
-          </Box> {/* Fim do Box "da linha criada"*/}
+          </Box> 
 
         </Box>
       </header>
