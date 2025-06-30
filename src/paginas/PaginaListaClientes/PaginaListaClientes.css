@@ -1,4 +1,4 @@
-.pagina-lista-clientes__item-cliente {
+/* .pagina-lista-clientes__item-cliente {
   background-color: #fff;
   padding: 8px;
   box-shadow: 0px 0px 4px 0px grey;
@@ -19,4 +19,69 @@
 .pagina-lista-clientes__item-cliente.nao-apto {
   background-color: #ffebee; 
   border-left: 5px solid #d32f2f; 
+} */
+.pagina-lista-clientes__novo {
+  display: inline-block;
+  padding: 10px 16px;
+  width: 9%;
+  margin-bottom: 16px;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.pagina-lista-clientes__novo:hover {
+  background-color: #4caf50;
+}
+
+.pagina-lista-clientes__mensagem {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 40px;
+}
+
+.pagina-lista-clientes__item-cliente {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  margin-bottom: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: box-shadow 0.2s ease;
+}
+
+.pagina-lista-clientes__item-cliente:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pagina-lista-clientes__item-cliente.apto {
+  border-left: 5px solid green;
+  background-color: #eaffea;
+}
+
+.pagina-lista-clientes__item-cliente.nao-apto {
+  border-left: 5px solid red;
+  background-color: #ffeaea;
+}
+
+
+.pagina-lista-clientes__item-cliente-acoes {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.pagina-lista-clientes__item-cliente-acoes svg {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.pagina-lista-clientes__item-cliente-acoes svg:hover {
+  transform: scale(1.1);
 }

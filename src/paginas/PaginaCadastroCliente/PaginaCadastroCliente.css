@@ -1,4 +1,4 @@
-.campo {
+/* .campo {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -11,4 +11,46 @@
     padding: 16px;
     font-size: 16px;
   }
+} */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.campo > label {
+  font-weight: bold;
+}
+
+.input-com-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.input-com-checkbox > input {
+  flex: 1;
+  height: 36px;
+  padding: 6px 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.input-com-checkbox > .MuiCheckbox-root {
+  padding: 0;
+  margin: 0;
 }
