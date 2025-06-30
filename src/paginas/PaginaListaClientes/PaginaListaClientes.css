@@ -21,9 +21,10 @@
   border-left: 5px solid #d32f2f; 
 } */
 .pagina-lista-clientes__novo {
+  justify-content: center;
   display: inline-block;
   padding: 10px 16px;
-  width: 9%;
+  width: 11%;
   margin-bottom: 16px;
   background-color: #4caf50;
   color: white;
